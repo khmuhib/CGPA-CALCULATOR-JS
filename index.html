@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <div class="container">
+        <nav>
+
+            <h1>Calculate Your GPA and CGPA</h1>
+
+<!--          <ul>
+            <li><a href="myresumes.html"></a>ABOUT Me</li>
+          </ul>-->
+
+         </nav>
+       </div>
+       <div class="tab">
+
+
+       <div class="left">
+            <div class="p">
+              <p>GPA</p>
+            </div>
+            <form action="/action_page.php">
+
+                <div>
+                    <p>Enter Your 3 credit subject GPA in <span style="color: darkorange ; font-size: 20px ;"><b>GPA 3 Credit</b></span > field and Enter Your 1 credit subject GPA in <span style="color: darkorange ; font-size: 20px ;"><b>GPA 1 Credit</b></span > field</p><br><br>
+
+                    Credit 3: <input id="input3Credit" type="number" name="creadit" value="0">
+                    <button onclick="myFunction3CreditAdd()" type="button" name="Add">Add</button><br><br>
+
+                    Credit 1: <input id="input1Subject" type="number" name="creadit" value="0">
+                    <button onclick="myFunction1CreditAdd()" type="button" name="Add">Add</button><br><br>
+
+                </div>
+
+                <hr>
+                <br><br>
+
+
+                <div>Total Credit:<p id="totalCreditOutput"></p></div>
+                <div>Subject:<p id="totalSubjectOutput"></p></div>
+                <div><h4>GPA:</h4><p id="totalGpa" style="font-size: medium ; color: red ; font-weight: bold"></p></div><br><br>
+
+
+                <button onclick="gpaCalculate()" type="button" name="Add">Calculate</button><br><br>
+                <!--<button onclick="reset()" type="button" name="Add">Reset</button><br><br>-->
+            </form>
+	    </div>
+
+
+
+       <div class="right">
+           <div class="p">
+               <p>CGPA</p>
+           </div>
+           <form action="/action_page.php">
+               <div>
+                   <p>Enter Your total semester credit in <span style="color: darkorange ; font-size: 20px ;"><b>Credit</b></span > field and Enter Your semester GPA in <span style="color: darkorange ; font-size: 20px ;"><b>GPA</b></span > field</p><br><br>
+                   Credit: <input id="inputSemesterCredit" type="number" name="creadit" value="0">
+                   GPA: <input id="inputSemesterGpa" type="number" name="gpa" value="0">
+
+               </div>
+               <br>
+
+               <button onclick="cgpaAddButton()" type="button" name="Add">ADD</button><br> <br>
+
+               <hr><br><br>
+
+               <div>Total Credit:<p id="totalSemeterCreditOutput"></p></div>
+               <div>Total Semester:<p id="totalSemeterOutput"></p></div>
+               <div><h4>CGPA:</h4> <p id="cgpaOutput" style="font-size: medium ; color: red ; font-weight: bold"></p></div>
+               <br><br>
+
+               <button onclick="overallcgpa()" type="button" name="Calculate">Caculate</button>
+               <br><br>
+           </form>
+       </div>
+
+
+           <script>
+
+           var subject=0;
+           var credit=0;
+           var gpa3credit=0;
+           var gpa1credit=0;
+
+           var overallCgpacredit=0;
+           var semester=0;
+           var gpa=0;
+           var cgpa=0;
+           var n=0;
+           var f=0;
+
+
+           function myFunction3CreditAdd() {
+
+               var subject3Credit = parseFloat(document.getElementById("input3Credit").value);
+
+               if (subject3Credit === 0){
+                   alert("Input Your Valid GPA Value");
+
+               }else if(subject3Credit >=4.1){
+                   alert("Input Your Valid GPA Value");
+               }else {
+                   credit = credit + 3;
+                   current3gpa = subject3Credit * 3;
+                   gpa3credit = gpa3credit + current3gpa;
+                   subject++;
+               }
+
+               document.getElementById("totalCreditOutput").innerHTML = credit;
+               document.getElementById("totalSubjectOutput").innerHTML = subject;
+               //document.getElementById("input3Credit").innerHTML = "0";
+               //document.getElementById("input1Subject").innerHTML = "0";
+           }
+
+           function myFunction1CreditAdd() {
+
+               var subject1Credit = parseFloat(document.getElementById("input1Subject").value);
+
+               if (subject1Credit === 0){
+                   alert("Input Your Valid GPA Value");
+
+               }else if(subject1Credit >=4.1){
+                   alert("Input Your Valid GPA Value");
+               }else {
+                   credit = credit + 1;
+                   current1gpa = subject1Credit;
+                   gpa1credit = gpa1credit + current1gpa;
+                   subject++;
+               }
+
+               document.getElementById("totalCreditOutput").innerHTML = credit;
+               document.getElementById("totalSubjectOutput").innerHTML = subject;
+           }
+
+           function gpaCalculate() {
+               totalGpa = gpa3credit + gpa1credit ;
+               n = totalGpa/credit;
+               totalGpa = n.toFixed(2);
+
+               document.getElementById("totalGpa").innerHTML = totalGpa;
+
+           }
+
+           function cgpaAddButton() {
+               var semesterCredit = parseFloat(document.getElementById("inputSemesterCredit").value);
+               var semesterGpa = parseFloat(document.getElementById("inputSemesterGpa").value);
+
+               if (semesterGpa === 0){
+                   alert("Input Your Valid GPA Value");
+
+               }else {
+                   semester++;
+                   gpa = semesterCredit*semesterGpa;
+                   cgpa = cgpa + gpa;
+                   overallCgpacredit = overallCgpacredit + semesterCredit;
+
+               }
+
+               document.getElementById("totalSemeterCreditOutput").innerHTML = overallCgpacredit;
+               document.getElementById("totalSemeterOutput").innerHTML = semester;
+
+
+           }
+
+           function overallcgpa() {
+               n = cgpa / overallCgpacredit;
+               f = n.toFixed(2);
+
+               document.getElementById("cgpaOutput").innerHTML = f;
+           }
+
+
+/*           function reset() {
+
+
+               document.getElementById("totalCreditOutput").innerHTML = credit;
+               document.getElementById("totalSubjectOutput").innerHTML = subject;
+           }*/
+
+       </script>
+
+
+
+ </div>
+  </body>
+</html>
